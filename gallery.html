@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galéria - Penzión Certo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<style>
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: #f7f3ee;
+    color: #2b2b2b;
+}
+
+/* NAV */
+nav {
+    background: #111;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 12px;
+    text-decoration: none;
+}
+
+/* HEADER */
+header {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 90px 20px;
+}
+
+/* GALLERY */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* LIGHTBOX */
+#lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#lightbox img {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.left { left: 20px; }
+.right { right: 20px; }
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
+
+</head>
+
+<body class="galeria">
+
+<nav>
+<a href="index.html">Domov</a>
+<a href="rooms.html">Ubytovanie</a>
+<a href="restaurant.html">Reštaurácia</a>
+<a href="wellness.html">Wellness</a>
+<a href="programs.html">Aktivity</a>
+<a href="gallery.html">Galéria</a>
+<a href="contact.html">Kontakt</a>
+<a href="booking.html">Rezervácia</a>
+</nav>
+
+<header>
+<h1>Galéria</h1>
+<p>Vaše zážitky začínajú tu</p>
+</header>
+
+<div class="gallery">
+
+<img src="images/bazen.jpg" onclick="openLightbox(0)">
+<img src="images/izba2.jpg" onclick="openLightbox(1)">
+<img src="images/restaurant.jpg" onclick="openLightbox(2)">
+<img src="images/sauna.jpg" onclick="openLightbox(3)">
+<img src="images/toskansko.jpg" onclick="openLightbox(4)">
+<img src="images/toskansko2.jpg" onclick="openLightbox(5)">
+<img src="images/vino.jpg" onclick="openLightbox(6)">
+<img src="images/wellness.jpg" onclick="openLightbox(7)">
+
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+    <span class="nav left" onclick="event.stopPropagation(); changeImg(-1)">&#10094;</span>
+    <img id="lightbox-img">
+    <span class="nav right" onclick="event.stopPropagation(); changeImg(1)">&#10095;</span>
+</div>
+
+<script>
+const images = [
+"images/bazen.jpg",
+"images/izba2.jpg",
+"images/restaurant.jpg",
+"images/sauna.jpg",
+"images/toskansko.jpg",
+"images/toskansko2.jpg",
+"images/vino.jpg",
+"images/wellness.jpg"
+];
+
+let current = 0;
+
+function openLightbox(index) {
+    current = index;
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = images[current];
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+
+function changeImg(step) {
+    current += step;
+
+    if (current < 0) current = images.length - 1;
+    if (current >= images.length) current = 0;
+
+    document.getElementById("lightbox-img").src = images[current];
+}
+</script>
+
+<footer>
+© 2026 Penzión Certo
+</footer>
+
+</body>
+</html>
